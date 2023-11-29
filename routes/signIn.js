@@ -13,6 +13,7 @@ router.get('/ggDinSke', function (req, res, next) {
 
 const dummyUser = [
   { email: "testUser@gmail.com", psw: bcrypt.hashSync("1234", 10) }, // Hashed for security
+  { email: "nej@gmail.com", psw: bcrypt.hashSync("4321", 10) }, // Hashed for security
 ];
 
 router.post('/', async function (req, res) {
@@ -33,7 +34,8 @@ router.post('/', async function (req, res) {
         // Create session or token here
         //req.session.userId = user.id; // For session-based
         req.session.userId = user.email; // For session-based
-        res.redirect('/signIn/success'); 
+        res.status(200).send('Logged in successfully');
+        //res.redirect('/signIn/success'); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
