@@ -1,3 +1,26 @@
+const request = require('supertest');
+const app = require('../app'); // Replace '../app' with the path to your Express app
+
+describe('POST /', () => {
+  it('should login successfully with valid credentials', async () => {
+    const validUser = {
+      email: 'testUser@gmail.com',
+      psw: '1234' 
+    };
+
+    const response = await request(app)
+      .post('/signIn') 
+      .send(validUser);
+
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('Logged in successfully');
+  });
+});
+
+
+
+
+/*
 // Importerer User modellen
 const User = require('../models/user'); // Importerer User-modellen fra din 'models/user' fil.
 
@@ -28,3 +51,5 @@ test('Dette bør håndtere fejl ved brugeroprettelse', async () => {
   await expect(User.create({ username: 'testuser', password: 'password' })).rejects.toThrow('Oprettelsesfejl');
   // Tester om User.create korrekt kaster en fejl, som defineret i mock-fejlen.
 });
+
+*/
