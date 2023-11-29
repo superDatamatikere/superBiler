@@ -9,8 +9,6 @@ const Car = sequelize.define('Car', {
   },
 });
 
-Car.associate = (models) => {
-    Car.belongsToMany(models.User, { through: 'UserCar' });
-  };
+Car.belongsToMany(models.User, { through: 'UserCar' });
 
 module.exports = Car;

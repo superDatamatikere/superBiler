@@ -17,7 +17,6 @@ const User = sequelize.define('User', {
   },
 });
 
-User.associate = (models) => {
-    User.belongsToMany(models.Car, { through: 'UserCar' });
-};
+User.belongsToMany(models.Car, { through: 'UserCar' });
+
 module.exports = User;
