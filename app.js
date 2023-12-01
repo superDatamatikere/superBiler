@@ -34,6 +34,7 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+app.use('/user/favourite/cars', usersRouter);
 app.use('/signIn', signInRouter);
 
 // catch 404 and forward to error handler

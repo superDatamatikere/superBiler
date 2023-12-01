@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { User } = require('../models');
+const { user } = require('../models');
 const bcrypt = require('bcrypt');
 
 router.get('/', function (req, res, next) {
@@ -11,29 +11,32 @@ router.get('/ggDinSke', function (req, res, next) {
   res.render("ggdinske", { title: 'Du spasserlam' });
 });
 
+/* 
 const dummyUser = [
   { email: "testUser@gmail.com", psw: bcrypt.hashSync("1234", 10) }, // Hashed for security
   { email: "nej@gmail.com", psw: bcrypt.hashSync("4321", 10) }, // Hashed for security
-];
+];*/
 
 router.post('/', async function (req, res) {
     try {
         const { email, psw } = req.body; // endpoint
+        
+        console.log(email, psw);
 
-        //const user = await User.findOne({ where: { email } });
-        const user = dummyUser.find(u => u.email === email);
-     
-        if (!user) {
+        const User = await user.findOne({ where: { email } });
+        //const user = dummyUser.find(u => u.email === email);
+
+        if (!User) {
             return res.status(401).send('Invalid credentials');
         }
-        const isMatch = await bcrypt.compare(psw, user.psw);
+        const isMatch = await bcrypt.compare(psw, User.password);
         if (!isMatch) {
             return res.status(401).send('Invalid credentials');
         }
 
         // Create session or token here
-        //req.session.userId = user.id; // For session-based
-        req.session.userId = user.email; // For session-based
+        req.session.userId = User.id; // For session-based
+        //req.session.userId = User.email; // For session-based
         res.status(200).send('Logged in successfully');
         //res.redirect('/signIn/success'); 
     } catch (error) {

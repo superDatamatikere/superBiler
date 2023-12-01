@@ -5,7 +5,7 @@ describe('POST /', () => {
   it('should login successfully with valid credentials', async () => {
     const validUser = {
       email: 'testUser@gmail.com',
-      psw: '1234' 
+      psw: '0000' 
     };
 
     const response = await request(app)
@@ -17,8 +17,33 @@ describe('POST /', () => {
   });
 });
 
+/*
+router.post('/', async function (req, res) {
+  try {
+      const { email, psw } = req.body; // endpoint
 
+      const User = await user.findOne({ where: { email } });
+      //const user = dummyUser.find(u => u.email === email);
 
+      if (!User) {
+          return res.status(401).send('Invalid credentials');
+      }
+      const isMatch = await bcrypt.compare(psw, User.password);
+      if (!isMatch) {
+          return res.status(401).send('Invalid credentials');
+      }
+
+      // Create session or token here
+      req.session.userId = User.id; // For session-based
+      //req.session.userId = User.email; // For session-based
+      res.status(200).send('Logged in successfully');
+      //res.redirect('/signIn/success'); 
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+  }
+});
+*/
 
 /*
 // Importerer User modellen

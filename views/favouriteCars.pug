@@ -1,0 +1,24 @@
+extends layout
+
+block styles
+
+
+block content
+  table
+    thead
+      tr
+        th User-Car Relationship ID
+        th User ID
+        th User Name
+        th Car ID
+        th License Plate
+    tbody
+      each userCar in userCars
+        tr
+          td #{userCar.userCarId}
+          td #{userCar.userId}
+          td #{userCar.userName}
+          td #{userCar.carId}
+          td #{userCar.licensePlate}
+
+
