@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "migrate:test": "cross-env NODE_ENV=test npx sequelize-cli db:migrate",
+    "seed:test": "cross-env NODE_ENV=test npx sequelize-cli db:seed:all",
     "test": "jest",
     "serve": "nodemon ./bin/www"
   },
@@ -22,6 +24,7 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "sequelize-cli": "^6.6.2",
