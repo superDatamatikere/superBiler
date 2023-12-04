@@ -1,13 +1,6 @@
-// searchPlate.js
-const axios = require('axios');
-
-async function searchPlate(plateNumber) {
-    try {
-        const response = await axios.get('URL_TIL_API', { params: { plate: plateNumber } });
-        return response.data;
-    } catch (error) {
-        throw new Error('Anmodningsfejl');
-    }
+async function searchPlate(licensePlate, database) {
+    const car = await database.findCarByLicensePlate(licensePlate);
+    return car;
 }
 
 module.exports = searchPlate;
