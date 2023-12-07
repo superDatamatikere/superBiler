@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    head
+        title Car Data
+    body
+        h1 Testing car data from API
+      table
+        thead
+          tr 
+            th registrings nummer 
+            th stel nummer 
+            th mærketype 
+            th model type 
+            th variant type 
+            th status 
+            th status Dato 
+        tbody
+          each car in cars
+            tr 
+              td #{car.regNr}
+              td #{car.stelNr}
+              td #{car.maerkeTypeNavn}
+              td #{car.modelTypeNavn}
+              td #{car.variantTypeNavn}
+              td #{car.status}
+              td #{car.statusDato}
+
+
+
+
+
+
+  
