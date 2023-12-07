@@ -18,21 +18,20 @@ block content
             .form-container.sign-in
                 form(action="/signIn" method="POST")
                     h1 Sign In
-                    span Use your email password
+                    span Use your email & password
                     input(type="email" name="email" placeholder="Email")
                     input(type="password" name="psw" placeholder="Password")
-                    a(href="/login/ggdinske") Forget Your Password?
                     button Sign In
 
             .toggle-container
                 .toggle
                     .toggle-panel.toggle-left
-                        h1 Welcome Back!
-                        p Enter your personal details to use all of site features
+                        h1 Got a account already?
+                        p Use the button below to sign in to your existing account
                         button.hidden#login Sign In
                     .toggle-panel.toggle-right
-                        h1 Hello, Friend!
-                        p Register with your personal details to use all of site features
+                        h1 Hello, New here?
+                        p Use the button below to sign up for a new account
                         button.hidden#register Sign Up
 
         script(src="javascripts/loginpage.js")

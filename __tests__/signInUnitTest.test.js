@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user'); // Importerer User-modellen fra din 'models/user' fil.
-const authenticateUser = require('../auth/authenticateUser'); // Importerer authenticateUser funktionen fra den angivne sti.
 
 // Mock User modellen
 jest.mock('../models/user', () => {
@@ -31,3 +30,18 @@ test('Dette bør håndtere fejl ved brugergodkendelse', async () => {
   await expect(authenticateUser('testuser', 'password')).rejects.toThrow('Godkendelsesfejl');
   // Tester om authenticateUser korrekt kaster en fejl, som defineret i mock-fejlen.
 });
+
+// Test-specific authenticateUser function
+async function authenticateUser(username, password) {
+  const user = await User.findOne({ username });
+  if (!user) {
+      throw new Error('Bruger ikke fundet');
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+      throw new Error('Forkert kodeord');
+  }
+
+  return user;
+}

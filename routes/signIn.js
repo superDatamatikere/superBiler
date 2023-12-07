@@ -7,24 +7,11 @@ router.get('/', function (req, res, next) {
     res.render("signIn", { title: 'Login Page' });
 });
 
-router.get('/ggDinSke', function (req, res, next) {
-  res.render("ggdinske", { title: 'Du spasserlam' });
-});
-
-/* 
-const dummyUser = [
-  { email: "testUser@gmail.com", psw: bcrypt.hashSync("1234", 10) }, // Hashed for security
-  { email: "nej@gmail.com", psw: bcrypt.hashSync("4321", 10) }, // Hashed for security
-];*/
-
 router.post('/', async function (req, res) {
     try {
         const { email, psw } = req.body; // endpoint
-        
-        console.log(email, psw);
 
         const User = await user.findOne({ where: { email } });
-        //const user = dummyUser.find(u => u.email === email);
 
         if (!User) {
             return res.status(401).send('Invalid credentials');
@@ -36,9 +23,9 @@ router.post('/', async function (req, res) {
 
         // Create session or token here
         req.session.userId = User.id; // For session-based
-        //req.session.userId = User.email; // For session-based
-        res.status(200).send('Logged in successfully');
-        //res.redirect('/signIn/success'); 
+
+        //res.status(200).send('Logged in successfully');
+        res.redirect('/signIn/success'); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
