@@ -7,3 +7,11 @@ block content
   form(action="/" method="POST")
     input(type="text" placeholder="ab12345" name="nummerplade" required)
     button(type="submit") Search
+
+  if car
+    table
+      tr 
+        th regNr
+        th Nummerplade
+      tr 
+        td #{car.regNr}

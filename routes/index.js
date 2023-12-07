@@ -9,30 +9,23 @@ const MOT_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/tstyr/repor
 /* GET home page. */
 router.get('/', async function(req, res) {
 
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Super Biler' });
 
 });
 
 router.post('/', async function(req, res){
   try {
-
-    const {nummerplade} = req.body;
-    plate = nummerplade;
-
-
-    if (plate == undefined) {
-        plate = nummerplade;
-    }
+    const {nummerplade} = req.body    
+    const plate = nummerplade;
+    let json;
 
     let request = await fetch(`${API_URL}/${plate}?amount=1`);
-    let json;
-    try {
-        json = await request.json();
-    } catch(err) {
-        return $('#vehicle').html(`<h3>Der kunne ikke findes noget data på dette køretøj.<h3/>`);
-    }
+    json = await request.json();
     
-    res.status(200).json({ json });
+    let cardata = json[0];
+    //res.status(200).json({carData});
+
+    res.render('index', {title: 'Super Biler', car: cardata});
 
   } catch (error) { console.error('Error', error) 
   res.status(500).json({error: 'server error'})}
