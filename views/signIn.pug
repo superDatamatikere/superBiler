@@ -5,34 +5,45 @@ block styles
 
 block content
     body
-        .container#container
-            .form-container.sign-up
-                form(action="/signUp" method="POST")
-                    h1 Create Account
-                    span Use your email for registration
-                    input(type="text" name="flname" placeholder="First & last Name")
-                    input(type="email" name="email" placeholder="Email")
-                    input(type="password" name="psw" placeholder="Password")
-                    button Sign Up
+        if message
+            .message
+                h2= message
+                script.
+                    setTimeout(function(){
+                        window.location.href = '/signIn';
+                    }, 3000);
+        else
+            .container#container
+                .form-container.sign-up
+                    form(action="/Signup" method="POST")
+                        h1 Create Account
+                        span Use your email for registration
+                        input(type="text" name="fname" placeholder="First Name")
+                        input(type="text" name="lname" placeholder="last Name")
+                        input(type="email" name="email" placeholder="Email")
+                        input(type="password" name="password" placeholder="Password")
+                        button Sign Up
+            
+            
 
-            .form-container.sign-in
-                form(action="/signIn" method="POST")
-                    h1 Sign In
-                    span Use your email password
-                    input(type="email" name="email" placeholder="Email")
-                    input(type="password" name="psw" placeholder="Password")
-                    a(href="/login/ggdinske") Forget Your Password?
-                    button Sign In
+                .form-container.sign-in
+                    form(action="/signIn" method="POST")
+                        h1 Sign In
+                        span Use your email password
+                        input(type="email" name="email" placeholder="Email")
+                        input(type="password" name="psw" placeholder="Password")
+                        a(href="/login/ggdinske") Forget Your Password?
+                        button Sign In
 
-            .toggle-container
-                .toggle
-                    .toggle-panel.toggle-left
-                        h1 Welcome Back!
-                        p Enter your personal details to use all of site features
-                        button.hidden#login Sign In
-                    .toggle-panel.toggle-right
-                        h1 Hello, Friend!
-                        p Register with your personal details to use all of site features
-                        button.hidden#register Sign Up
+                .toggle-container
+                    .toggle
+                        .toggle-panel.toggle-left
+                            h1 Welcome Back!
+                            p Enter your personal details to use all of site features
+                            button.hidden#login Sign In
+                        .toggle-panel.toggle-right
+                            h1 Hello, Friend!
+                            p Register with your personal details to use all of site features
+                            button.hidden#register Sign Up
 
-        script(src="javascripts/loginpage.js")
+            script(src="javascripts/loginpage.js")
