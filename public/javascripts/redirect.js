@@ -1,5 +1,5 @@
 if (window.message) {
   setTimeout(function(){
-      window.location.href = '/signIn';
+      window.location.href = '/';
   }, 3000);
 }

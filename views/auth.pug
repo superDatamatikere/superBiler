@@ -1,13 +1,21 @@
 extends layout
 
 block styles
-    link(rel='stylesheet' href='/stylesheets/signInUpStyle.css')
+    link(rel='stylesheet' href='/stylesheets/authStyle.css')
 
 block content
     body
+        if message
+            .message
+                h2= message
+                script.
+                    setTimeout(function(){
+                        window.location.href = '/';
+                    }, 3000);
+        else
         .container#container
             .form-container.sign-up
-                form(action="/signUp" method="POST")
+                form(action="/auth/signup" method="POST")
                     h1 Create Account
                     span Use your email for registration
                     input(type="text" name="fname" placeholder="First Name")
@@ -17,12 +25,11 @@ block content
                     button Sign Up
 
             .form-container.sign-in
-                form(action="/signIn" method="POST")
+                form(action="/auth/login" method="POST")
                     h1 Sign In
-                    span Use your email & password
+                    span Use your email password
                     input(type="email" name="email" placeholder="Email")
                     input(type="password" name="psw" placeholder="Password")
-                    a(href="/login/ggdinske") Forget Your Password?
                     button Sign In
 
             .toggle-container
@@ -36,6 +43,6 @@ block content
                         p Use the button below to sign up for a new account
                         button.hidden#register Sign Up
 
-        script(src="javascripts/signInUpPage.js")
+        script(src="/javascripts/authPage.js")
 
 
