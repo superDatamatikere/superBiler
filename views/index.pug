@@ -1,5 +1,39 @@
 extends layout
 
+block styles
+    link(rel='stylesheet' href='/stylesheets/indexstyle.css')
+
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action="/" method="POST")
+    input(type="text" placeholder="ab12345" name="nummerplade" required)
+    button(type="submit") Search
+
+  if car
+    table.table-container
+      tr.header-row
+        th Nummerplade
+        th Mærke 
+        th Model
+        th Kilometer Tal 
+
+      tr.data-row
+        td #{car.regNr}
+        td #{car.maerkeTypeNavn}
+        td #{car.modelTypeNavn}
+        td #{car.motorKilometerstand}
+
+    table.table-container 
+      tr.header-row 
+        th Hestekræfter 
+        th Drivmiddel 
+        th Vægt 
+        th Status
+
+      tr.data-row
+        td #{car.motorHestekraefter}
+        td #{car.drivkraftTypeNavn}
+        td #{car.totalVaegt}
+        td #{car.status}

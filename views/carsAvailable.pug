@@ -1,0 +1,28 @@
+extends layout
+
+block styles
+
+
+block content
+  table
+    thead
+      tr
+        th Car ID
+        th License Plate
+    tbody
+      each car in cars
+        tr
+          td #{car.id}
+          td #{car.licensePlate}
+          td
+            form(action="/user/cars" method="POST")
+            button(type="submit", onclick='addToFavorite("#{car.id}")') Favorite
+
+            script.
+                function addToFavorite(input){
+                    var val = confirm (input);
+                    console.log(input);
+                    if (val==true){
+                        return true;
+                    }
+                };

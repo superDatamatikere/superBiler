@@ -31,7 +31,29 @@ router.get('/favourite/cars', async function(req, res, next) {
 	  res.status(500).send("Error occurred");
 	}
   });
-  
+
+  router.get('/cars', async function (req, res, next) {
+	try {
+		const cars = await car.findAll();
+
+		res.render('carsAvailable', { title: 'Available Cars', cars: cars });
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Error occurred");
+	}
+  });
+
+
+  router.post('/cars', async function (req, res, next) {
+	try {
+		await userCar.create({
+			userId: req.session.userId, 
+		});
+	} catch (e) {
+		console.error(e);
+		res.status(500).send("Error occurred");
+	}
+  });
   
 
 module.exports = router;
