@@ -12,9 +12,28 @@ block content
     button(type="submit") Search
 
   if car
-    table
-      tr 
-        th regNr
+    table.table-container
+      tr.header-row
         th Nummerplade
-      tr 
+        th Mærke 
+        th Model
+        th Kilometer Tal 
+
+      tr.data-row
         td #{car.regNr}
+        td #{car.maerkeTypeNavn}
+        td #{car.modelTypeNavn}
+        td #{car.motorKilometerstand}
+
+    table.table-container 
+      tr.header-row 
+        th Hestekræfter 
+        th Drivmiddel 
+        th Vægt 
+        th Status
+
+      tr.data-row
+        td #{car.motorHestekraefter}
+        td #{car.drivkraftTypeNavn}
+        td #{car.totalVaegt}
+        td #{car.status}

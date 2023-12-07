@@ -63,3 +63,40 @@ body {
     margin-top: 10px;
     cursor: pointer;
 }
+
+.table-container {
+    width: 80%; /* Adjust as needed */
+    margin: 0 auto; /* Center the table */
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .header-row th, .data-row td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    max-width: 200px; /* Adjust as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .header-row th {
+    background-color: #512da8;
+    color: #fff;
+  }
+  
+  .data-row td {
+    background-color: #f9f9f9;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  button {
+    background-color: #512da8;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
