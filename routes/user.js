@@ -5,10 +5,15 @@ const { car, user, userCar} = require("../models")
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
-},
+});
 
-);
-
+router.get('/account', function(req, res, next) {
+	if (!req.session.userId) {
+		return res.status(401).send("Not authorized");
+	}
+	res.send(`Welcome, your session ID is: ${req.session.userId}`);
+  });
+  
 
 router.get('/favourite/cars', async function(req, res, next) {
 	try {
