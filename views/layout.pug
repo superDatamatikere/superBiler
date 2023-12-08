@@ -9,6 +9,11 @@ html
       nav 
         ul
           li: a(href='/') Home
-          li: a(href='/auth') Login
+          
+          if isLoggedIn
+            i: a(href='/auth/logout') Logout
+          else
+            li: a(href='/auth') Login
+
           li: a(href='/user') Account
     block content
