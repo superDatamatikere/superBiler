@@ -15,10 +15,15 @@ router.get('/account', async function(req, res, next) {
 		const currentUser = await user.findOne({ where: { id: req.session.userId } });   
 		res.render('account', { title: 'Account Page', isLoggedIn: req.session.userId, User: currentUser });
 	}
-	
-
   });
   
+  router.get('/update', function(req, res, next) {
+	res.send('respond with a resource');
+  });
+
+  router.get('/delete', function(req, res, next) {
+	res.send('respond with a resource');
+  });
 
 router.get('/favourite/cars', async function(req, res, next) {
 	try {

@@ -1,14 +1,62 @@
-/* Ensure the body has enough padding to account for the fixed header */
 body {
-    padding-top: 70px; /* Adjust this value to match the height of your header */
+    padding-top: 70px; /* Adjust to match the header height */
+    padding-bottom: 100px; /* Space for footer */
+    align-items: flex-start; /* Align items to the start, i.e., top of the viewport */
+    justify-content: flex-start; /
 }
 
-
-/* Main content styling */
+/* Main Content Specifics for Account Page */
 main {
-    /* If your main content is wrapped in a main tag */
-    padding-top: 20px;
-    height: 100%;
+    padding: 20px 0; 
+    max-width: 800px; 
+    margin: 0 auto; /* Center the main content */
+    text-align: center; /* Center-align text for account-specific content */
 }
 
+main h1 {
+    font-size: 36px; /* Large font  heading */
+    margin: 20px 0; 
+}
 
+main p {
+    font-size: 20px; 
+    margin: 10px 0; 
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding-top: 10vh;
+    width: 50%;
+}
+
+.flex-container > a {
+    background-color: #007bff; 
+    margin: 10px;
+    text-align: center;
+    line-height: 75px; /* Consider reducing if button height is less */
+    font-size: 20px;
+    border-radius: 25px;
+    cursor: pointer; /* To indicate it's clickable */
+    border: none; 
+    color: #12171d; 
+    padding: 5px 20px; /* Adjust as needed */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.flex-container > a:hover {
+    background-color: #5892ff; 
+    color: white; 
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: column; 
+    }
+
+    main {
+        padding: 20px 0;
+    }
+}

@@ -62,13 +62,12 @@ main {
 
 /* Footer styling */
 footer {
-  background-color: #ffffff; /* white background */
+  background-color: #ffffff;
   color: #333;
   text-align: center;
   padding: 10px 20px;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.1); /* shadow for depth */
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
   position: fixed;
   bottom: 0;
-  width: calc(100% - 40px); /* Adjust for padding */
-  left: 20px; /* Align with body padding */
+  width: 100%;
 }

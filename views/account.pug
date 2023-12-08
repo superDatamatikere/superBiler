@@ -5,8 +5,18 @@ block styles
 
 
 block content
-    main
-        h1 Account page
-        p Welcome #{User.fname} #{User.lname}! This is your Account page
-    
+    body
+        main
+            h1 Account page
+            p Welcome #{User.fname} #{User.lname}! This is your Account page
+            .flex-container
+                a(href='/user/favourite/cars') Favourite Cars
+                a(href='/user/update') Edit account
+                a(href='/user/delete') Delete account
+         
+
+
+ 
+
+
     
