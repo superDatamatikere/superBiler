@@ -5,10 +5,20 @@ const { car, user, userCar} = require("../models")
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
-},
+});
 
-);
+router.get('/account', async function(req, res, next) {
+	if (!req.session.userId) {
+		res.redirect('/auth');
+	}
+	else if (req.session.userId) {
+		const currentUser = await user.findOne({ where: { id: req.session.userId } });   
+		res.render('account', { title: 'Account Page', isLoggedIn: req.session.userId, User: currentUser });
+	}
+	
 
+  });
+  
 
 router.get('/favourite/cars', async function(req, res, next) {
 	try {

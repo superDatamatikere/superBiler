@@ -9,11 +9,11 @@ describe('POST /', () => {
     };
 
     const response = await request(app)
-      .post('/signIn') 
+      .post('/auth/login') 
       .send(validUser);
 
     expect(response.status).toBe(200);
-    expect(response.text).toBe('Logged in successfully');
+    expect(response.text).toContain('Success! You will be redirected in 3 seconds...');
   });
 });
 

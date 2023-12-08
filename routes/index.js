@@ -9,7 +9,7 @@ const MOT_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/tstyr/repor
 /* GET home page. */
 router.get('/', async function(req, res) {
 
-  res.render('index', { title: 'Super Biler' });
+  res.render('index', { title: 'Super Biler', isLoggedIn: req.session.userId});
 
 });
 

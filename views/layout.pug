@@ -2,7 +2,19 @@ doctype html
 html
   head
     title= title
-    //link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet' href='/stylesheets/commonStyle.css')
     block styles
   body
+    header
+      nav 
+        ul
+          li: a(href='/') Home
+          li: a(href='/user/account') Account
+          if isLoggedIn
+            li: a(href='/auth/logout') Logout
+
+
     block content
+    footer
+      p &copy; 2023 - 2023
+      p Made by: Super Datamatikere
