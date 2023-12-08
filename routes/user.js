@@ -9,9 +9,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/account', function(req, res, next) {
 	if (!req.session.userId) {
-		return res.status(401).send("Not authorized");
+		res.redirect('/auth');
 	}
-	res.send(`Welcome, your session ID is: ${req.session.userId}`);
+	res.render('account', { title: 'Account Page', isLoggedIn: req.session.userId});
   });
   
 

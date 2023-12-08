@@ -26,7 +26,6 @@ router.post('/login', async function (req, res) {
 		// Create session or token herecls
 		req.session.userId = User.id; // For session-based
 
-		req.session.isLoggedIn = true;
 		res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
 
 	} catch (error) {
@@ -36,8 +35,6 @@ router.post('/login', async function (req, res) {
 });
 
 router.get('/logout', (req, res) => {
-	req.session.isLoggedIn = false; 
-	console.log(req.session.isLoggedIn);
 	req.session.destroy((err) => {
 		if (err) {
 			console.error("Session destruction error:", err);
@@ -49,14 +46,13 @@ router.get('/logout', (req, res) => {
 	});
 });
 
-
-
+/*
 router.get('/success', (req, res) => {
 	if (!req.session.userId) {
 		return res.status(401).send("Not authorized");
 	}
 	res.send(`Welcome, your session ID is: ${req.session.userId}`);
-});
+});*/
 
 
 // Endpoint for brugeroprettelse
