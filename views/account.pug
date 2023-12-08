@@ -1,10 +1,12 @@
 extends layout
 
 block styles
-    link(rel='stylesheet' href='/stylesheets/test.css')
+    link(rel='stylesheet' href='/stylesheets/account.css')
 
 
 block content
-    h1 Account
-    p Welcome to your account page
-    p 
+    main
+        h1 Account page
+        p Welcome #{User.fname} #{User.lname}! This is your Account page
+    
+    

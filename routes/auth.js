@@ -22,7 +22,6 @@ router.post('/login', async function (req, res) {
 		if (!isMatch) {
 			return res.status(401).send('Invalid credentials');
 		}
-
 		// Create session or token herecls
 		req.session.userId = User.id; // For session-based
 

@@ -1,0 +1,14 @@
+/* Ensure the body has enough padding to account for the fixed header */
+body {
+    padding-top: 70px; /* Adjust this value to match the height of your header */
+}
+
+
+/* Main content styling */
+main {
+    /* If your main content is wrapped in a main tag */
+    padding-top: 20px;
+    height: 100%;
+}
+
+
