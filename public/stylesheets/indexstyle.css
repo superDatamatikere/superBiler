@@ -31,19 +31,7 @@
     outline: none;
 }
 
-.container button {
-    background-color: #512da8;
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 20px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
-    cursor: pointer;
-}
+
 
 .table-container {
     width: 80%; /* Adjust as needed */
@@ -78,6 +66,14 @@
   button {
     background-color: #512da8;
     color: #fff;
-    border: none;
+    font-size: 12px;
+    padding: 4px 20px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-left: 5px;
     cursor: pointer;
-  }
+}
