@@ -2,7 +2,13 @@ doctype html
 html
   head
     title= title
-    //link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet' href='/stylesheets/style.css')
     block styles
   body
+    header
+      nav 
+        ul
+          li: a(href='/') Home
+          li: a(href='/auth') Login
+          li: a(href='/user') Account
     block content
