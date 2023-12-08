@@ -9,11 +9,13 @@ html
       nav 
         ul
           li: a(href='/') Home
-          
           if isLoggedIn
-            i: a(href='/auth/logout') Logout
+            li: a(href='/auth/logout') Logout
           else
             li: a(href='/auth') Login
 
           li: a(href='/user') Account
     block content
+    footer
+      p &copy; 2023 - 2023
+      p Made by: Super Datamatikere

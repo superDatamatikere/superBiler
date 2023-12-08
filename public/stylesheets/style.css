@@ -1,0 +1,70 @@
+/* Reset some basic elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General body styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5; /*  white grey background */
+  color: #333; /*  grey text for better readability */
+  margin: 0;
+  padding: 20px;
+}
+
+/* Header styling */
+header {
+  width : 100%;
+  position: fixed;
+  top : 0;
+  background-color: #ffffff; /* white background */
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /*  shadow for depth */
+}
+
+/* Navigation bar styling */
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333; /*  grey to match the body text */
+  font-weight: bold; /* Make it bold*/
+}
+
+nav ul li a:hover {
+  color: #007bff; /* A blue color on hover */
+}
+
+/* Main content styling */
+main {
+  text-align: center; /* Center main content text */
+  padding: 50px 0; /* More padding for aesthetic spacing */
+}
+
+/* Footer styling */
+footer {
+  background-color: #ffffff; /* white background */
+  color: #333;
+  text-align: center;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1); /* shadow for depth */
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 40px); /* Adjust for padding */
+  left: 20px; /* Align with body padding */
+}
