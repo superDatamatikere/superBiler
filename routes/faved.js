@@ -10,17 +10,18 @@ router.post('/', async function (req, res) {
     if (req.session.userId) {
       
       await userCar.create({
-        userId: req.session.userId,
+        userID: req.session.userId,
         carId: carId,
         createdAt: new Date()
       });
+    } else {
+      res.status(401).json({ error: 'Invalid Credential'})
     }
-
     res.sendStatus(200);
   } catch (error) {
     console.error('Error', error);
     res.status(500).json({ error: 'server error' });
   }
-});
+}); 
 
 module.exports = router;
