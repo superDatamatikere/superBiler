@@ -16,8 +16,6 @@ router.post('/', async function (req, res) {
       });
     }
 
-    console.log("new fave added: regnr-userid-dato" + plate + " - " + userId + " - " + createdAt)
-
     res.sendStatus(200);
   } catch (error) {
     console.error('Error', error);
