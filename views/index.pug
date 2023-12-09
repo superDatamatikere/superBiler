@@ -37,3 +37,7 @@ block content
         td #{car.drivkraftTypeNavn}
         td #{car.totalVaegt}
         td #{car.status}
+
+    form(action="/faved" method="POST")
+      input(type="hidden" name="nummerplade" value=car.regNr)
+      button(type="submit") Add to Favorites
