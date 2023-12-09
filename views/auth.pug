@@ -12,7 +12,10 @@ block content
                     setTimeout(function(){
                         window.location.href = '/';
                     }, 3000);
-        else
+        else if errorMessage
+            .message
+                h2= errorMessage
+        else    
         .container#container
             .form-container.sign-up
                 form(action="/auth/signup" method="POST")

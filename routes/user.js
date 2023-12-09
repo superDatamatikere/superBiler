@@ -4,7 +4,7 @@ const { car, user, userCar} = require("../models")
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+	res.redirect('/user/account');
 });
 
 router.get('/account', async function(req, res, next) {
@@ -31,7 +31,7 @@ router.get('/favourite/cars', async function(req, res, next) {
 		where: { userId: req.session.userId },
 		include: [car, user]
 	  });
-  
+
 	  const formattedData = userCars.map(({ id, car, user }) => ({
 		userCarId: id,
 		userId: user?.id,

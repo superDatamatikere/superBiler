@@ -16,17 +16,19 @@ router.post('/login', async function (req, res) {
 		const User = await user.findOne({ where: { email } });
 
 		if (!User) {
-			return res.status(401).send('Invalid credentials');
-		}
-		const isMatch = await bcrypt.compare(psw, User.password);
-		if (!isMatch) {
-			return res.status(401).send('Invalid credentials');
-		}
-		// Create session or token herecls
-		req.session.userId = User.id; // For session-based
+			res.render("auth", { title: 'authentication Page', errorMessage: 'Invalid credentials' });
 
-		res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
+		} else if (User) {
+			const isMatch = await bcrypt.compare(psw, User.password);
 
+			if (!isMatch) {
+				res.render("auth", { title: 'authentication Page', errorMessage: 'Invalid credentials' });
+
+			} else if (isMatch) {
+				req.session.userId = User.id; // For session-based
+				res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
+			}
+		} 
 	} catch (error) {
 		console.error(error);
 		res.status(500).send('Server error');
@@ -44,7 +46,6 @@ router.get('/logout', (req, res) => {
 		}
 	});
 });
-
 /*
 router.get('/success', (req, res) => {
 	if (!req.session.userId) {
@@ -65,17 +66,25 @@ router.post('/signup', async function (req, res) {
 		// Hash adgangskoden
 		const hashedPassword = await bcrypt.hash(password, 10);
 
-		// Opret bruger i databasen
-		const newUser = await user.create({
-			fname,
-			lname,
-			email,
-			password: hashedPassword,
+		const findUser = await user.findOne({ where: { email } }).then(async (USER) => {
+			if (USER) {
+				//return res.status(401).send('User already exists');
+				res.render("auth", { title: 'authentication Page', errorMessage: 'Email is already in use' });
+			}
+			else {
+
+				// Opret bruger i databasen
+				const newUser = await user.create({
+					fname,
+					lname,
+					email,
+					password: hashedPassword,
+				});
+				req.session.userId = newUser.id; // For session-based
+				res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
+				//res.status(201).json({ message: 'Bruger oprettet', user: newUser });
+			}
 		});
-
-		res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
-		//res.status(201).json({ message: 'Bruger oprettet', user: newUser });
-
 	} catch (error) {
 		console.error('Fejl ved brugeroprettelse:', error);
 		res.status(500).json({ message: 'Der opstod en fejl ved oprettelse af brugeren' });
