@@ -5,13 +5,13 @@ const { userCar } = require('../models');
 router.post('/', async function (req, res) {
   try {
     const { nummerplade } = req.body;
-    const carId = nummerplade;
+
 
     if (req.session.userId) {
       
       await userCar.create({
         userID: req.session.userId,
-        carId: carId,
+        carId: nummerplade,
         createdAt: new Date()
       });
     } else {
