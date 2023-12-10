@@ -4,45 +4,21 @@ block styles
   link(rel='stylesheet' href='/stylesheets/indexstyle.css')
 
 block content
-  h1= title
-  p Welcome to #{title}
+  body 
+    main
+      h1= title
+      p Welcome to #{title}
 
-  form(action="/" method="POST")
-    input(type="text" placeholder="ab12345" name="nummerplade" required)
-    button(type="submit") Search
+      form(action="/" method="POST")
+        input(type="text" placeholder="ab12345" name="nummerplade" required)
+        button(type="submit") Search
 
-  if car
-    table.table-container
-      tr.header-row
-        th Nummerplade
-        th Mærke 
-        th Model
-        th Kilometer Tal 
-
-      tr.data-row
-        td #{car.regNr}
-        td #{car.maerkeTypeNavn}
-        td #{car.modelTypeNavn}
-        td #{car.motorKilometerstand}
-
-    table.table-container 
-      tr.header-row 
-        th Hestekræfter 
-        th Drivmiddel 
-        th Vægt 
-        th Status
-
-      tr.data-row
-        td #{car.motorHestekraefter}
-        td #{car.drivkraftTypeNavn}
-        td #{car.totalVaegt}
-        td #{car.status}
-
-      if isFavorite
-        form(action="/car/favorite" method="POST")
-          input(type="hidden" name="nummerplade" value=car.regNr)
-          button(type="submit") Remove from Favorites
-      else
-        form(action="/car/favorite" method="POST")
-          input(type="hidden" name="nummerplade" value=car.regNr)
-          button(type="submit") Add to Favorites
+      
+      if car
+        a.car-container(href="/cars/" + car.regNr)
+            img.car-image(src='static/genericCar.png' alt=car.name)
+            .car-info
+              h2.car-name #{car.name}
+              p license Plate: #{car.regNr}
+              p Make: #{car.maerkeTypeNavn}
+              p Model: #{car.modelTypeNavn}

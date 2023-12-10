@@ -4,10 +4,12 @@ const { user } = require("../models")
 const bcrypt = require('bcrypt');
 
 router.get('/', function (req, res, next) {
-	res.render("auth", { title: 'authentication Page' });
+	if (!req.session.userId) {
+		res.render("auth", { title: 'authentication Page' });
+	} else if (req.session.userId) {
+		res.redirect('/user/account');
+	}
 });
-
-
 
 router.post('/login', async function (req, res) {
 	try {

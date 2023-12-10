@@ -77,3 +77,36 @@
     margin-left: 5px;
     cursor: pointer;
 }
+
+.car-container {
+  display: flex; /* Use flexbox */
+  margin-top: 20px; /* Add some space after the form */
+  border: 1px solid #000000; /* Add a border */
+  padding: 10px; /* Add some padding */
+  align-items: center; /* Align items vertically in the center */
+  text-decoration: none; /* Remove the underline from links */
+  color: inherit; /* Inherit the text color from parent */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.car-container:hover {
+  background-color: #ffffff; /* Slight background color on hover to indicate it's clickable */
+}
+
+/* Style for the car image */
+.car-image {
+  max-width: 120px; /* Set a max-width for the image */
+  margin-right: 20px; /* Add space after the image */
+}
+
+/* Style for the car information */
+.car-info {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack the info vertically */
+}
+
+.car-name {
+  font-size: 1.5em; /* Larger text for the car name */
+}
+
+

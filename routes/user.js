@@ -48,7 +48,7 @@ router.get('/favourite/cars', async function (req, res, next) {
 				licensePlate: car?.licensePlate
 			}));
 
-			res.render('favouriteCars', { title: 'Favourite Car Relationships', userCars: formattedData });
+			res.render('favouriteCars', { title: 'Favourite Car Relationships', userCars: formattedData, isLoggedIn: req.session.userId});
 		}
 	} catch (e) {
 		console.error(e);

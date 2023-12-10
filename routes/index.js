@@ -9,7 +9,7 @@ const MOT_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/tstyr/repor
 /* GET home page. */
 router.get('/', async function (req, res) {
 
-  res.render('index', { title: 'Super Biler', isLoggedIn: req.session.userId });
+  res.render('index', { title: 'Super Cars', isLoggedIn: req.session.userId });
 
 });
 
@@ -25,71 +25,12 @@ router.post('/', async function (req, res) {
     let cardata = json[0];
     //res.status(200).json({carData});
 
-    if (req.session.userId) {
-      
-      console.log(req.session.userId);
-
-      const findSpecificCar = await car.findOne({ where: { licensePlate: nummerplade } }) || await car.create({
-        licensePlate: nummerplade
-      });
-
-      console.log(findSpecificCar.licensePlate);
-
-      const findUserCar = await userCar.findOne({ where: {userID: req.session.userId, carID: findSpecificCar.id }}); 
-     
-      res.render('index', { title: 'Super Biler', car: cardata, isFavorite: findUserCar});
-    } else {
-      res.render('index', { title: 'Super Biler', car: cardata });
-    }
-
-
+   
+      res.render('index', { title: 'Super Cars', car: cardata, isLoggedIn: req.session.userId});
   } catch (error) {
     console.error('Error', error)
     res.status(500).json({ error: 'server error' })
   }
 });
-
-
-router.post('/car/favorite', async function (req, res, next) { // handles option for user to add car to favorite
-  try {
-    const { nummerplade } = req.body;
-
-    if (req.session.userId) {
-
-      const Car = await car.findOne({ where: { licensePlate: nummerplade } }) || await car.create({
-        licensePlate: nummerplade
-      });
-
-      await userCar.create({
-        userID: req.session.userId,
-        carID: Car.id
-      });
-
-    } else {
-      res.status(401).json({ error: 'Invalid Credential' })
-    }
-    res.redirect('back');
-
-  } catch (error) {
-    console.error('Error', error);
-    res.status(500).json({ error: 'server error' });
-  }
-});
-
-
-router.post('/car/unfavorite', async function (req, res) {
-  try {
- 
-
-
-  } catch (error) {
-    console.error('Error', error)
-    res.status(500).json({ error: 'server error' })
-  }
-});
-
-
-
-
 
 module.exports = router;

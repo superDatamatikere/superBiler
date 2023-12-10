@@ -1,28 +1,3 @@
-body {
-    padding-top: 70px; /* Adjust to match the header height */
-    padding-bottom: 100px; /* Space for footer */
-    align-items: flex-start; /* Align items to the start, i.e., top of the viewport */
-    justify-content: flex-start; /
-}
-
-/* Main Content Specifics for Account Page */
-main {
-    padding: 20px 0; 
-    max-width: 800px; 
-    margin: 0 auto; /* Center the main content */
-    text-align: center; /* Center-align text for account-specific content */
-}
-
-main h1 {
-    font-size: 36px; /* Large font  heading */
-    margin: 20px 0; 
-}
-
-main p {
-    font-size: 20px; 
-    margin: 10px 0; 
-}
-
 .flex-container {
     display: flex;
     flex-direction: column;
