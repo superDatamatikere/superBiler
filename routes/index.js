@@ -3,68 +3,89 @@ var router = express.Router();
 const { userCar, car } = require('../models');
 
 const API_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/dmr/regnrquery';
-const MOT_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/tstyr/reports?vin=' 
+const MOT_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/tstyr/reports?vin='
 // Dette kører igennem en corsproxy, da jeg fik en CORS fejl.
 
 /* GET home page. */
-router.get('/', async function(req, res) {
+router.get('/', async function (req, res) {
 
-  res.render('index', { title: 'Super Biler', isLoggedIn: req.session.userId});
+  res.render('index', { title: 'Super Biler', isLoggedIn: req.session.userId });
 
 });
 
-router.post('/', async function(req, res){
+router.post('/', async function (req, res) {
   try {
-    const {nummerplade} = req.body    
+    const { nummerplade } = req.body
     const plate = nummerplade;
     let json;
 
     let request = await fetch(`${API_URL}/${plate}?amount=1`);
     json = await request.json();
-    
+
     let cardata = json[0];
     //res.status(200).json({carData});
 
-    res.render('index', {title: 'Super Biler', car: cardata});
+    if (req.session.userId) {
+      
+      console.log(req.session.userId);
 
-  } catch (error) { console.error('Error', error) 
-  res.status(500).json({error: 'server error'})}
+      const findSpecificCar = await car.findOne({ where: { licensePlate: nummerplade } }) || await car.create({
+        licensePlate: nummerplade
+      });
+
+      console.log(findSpecificCar.licensePlate);
+
+      const findUserCar = await userCar.findOne({ where: {userID: req.session.userId, carID: findSpecificCar.id }}); 
+     
+      res.render('index', { title: 'Super Biler', car: cardata, isFavorite: findUserCar});
+    } else {
+      res.render('index', { title: 'Super Biler', car: cardata });
+    }
+
+
+  } catch (error) {
+    console.error('Error', error)
+    res.status(500).json({ error: 'server error' })
+  }
 });
 
-router.post('/car/favorite', async function(req, res){ // handles option for user to add car to favorite
+
+router.post('/car/favorite', async function (req, res, next) { // handles option for user to add car to favorite
   try {
     const { nummerplade } = req.body;
 
     if (req.session.userId) {
 
-      const Car = await car.findOne({ where: {licensePlate: nummerplade }}) || await car.create({
+      const Car = await car.findOne({ where: { licensePlate: nummerplade } }) || await car.create({
         licensePlate: nummerplade
       });
-      
+
       await userCar.create({
         userID: req.session.userId,
         carID: Car.id
       });
 
     } else {
-      res.status(401).json({ error: 'Invalid Credential'})
+      res.status(401).json({ error: 'Invalid Credential' })
     }
-    res.sendStatus(200);
-    
+    res.redirect('back');
+
   } catch (error) {
     console.error('Error', error);
     res.status(500).json({ error: 'server error' });
   }
-}); 
+});
 
 
-router.post('/car/unfavorite', async function(req, res){
+router.post('/car/unfavorite', async function (req, res) {
   try {
+ 
 
-    
 
-  } catch (error) { console.error('Error', error) 
-  res.status(500).json({error: 'server error'})}
+  } catch (error) {
+    console.error('Error', error)
+    res.status(500).json({ error: 'server error' })
+  }
 });
 
 
