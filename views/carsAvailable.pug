@@ -16,7 +16,7 @@ block content
           td #{car.licensePlate}
           td
             form(action="/user/cars" method="POST")
-            button(type="submit", onclick='addToFavorite("#{car.id}")') Favorite
+            button(type="submit", onclick=`addToFavorite('${car.id}')`) Favorite
 
             script.
                 function addToFavorite(input){

@@ -1,7 +1,7 @@
 extends layout
 
 block styles
-    link(rel='stylesheet' href='/stylesheets/indexstyle.css')
+  link(rel='stylesheet' href='/stylesheets/indexstyle.css')
 
 block content
   h1= title
@@ -38,6 +38,11 @@ block content
         td #{car.totalVaegt}
         td #{car.status}
 
-    form(action="/faved" method="POST")
-      input(type="hidden" name="nummerplade" value=car.regNr)
-      button(type="submit") Add to Favorites
+      if isFavorite
+        form(action="/car/favorite" method="POST")
+          input(type="hidden" name="nummerplade" value=car.regNr)
+          button(type="submit") Remove from Favorites
+      else
+        form(action="/car/favorite" method="POST")
+          input(type="hidden" name="nummerplade" value=car.regNr)
+          button(type="submit") Add to Favorites
