@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { userCar } = require('../models');
+const { userCar, car } = require('../models');
 
 router.post('/', async function (req, res) {
   try {
@@ -8,12 +8,18 @@ router.post('/', async function (req, res) {
 
 
     if (req.session.userId) {
+
+      const Car = await car.findOne({ where: {licensePlate: nummerplade }}) || await car.create({
+        licensePlate: nummerplade
+      });
+    
+
       
       await userCar.create({
         userID: req.session.userId,
-        carId: nummerplade,
-        createdAt: new Date()
+        carId: Car.id,
       });
+
     } else {
       res.status(401).json({ error: 'Invalid Credential'})
     }
