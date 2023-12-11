@@ -18,33 +18,34 @@ router.get('/', async function (req, res) {
 
 router.post('/unfavorite', async function (req, res) {
     try {
-        const { plate } = req.body;
-    
         if (req.session.userId) {
-          const carToRemove = await car.findOne({ where: { licensePlate: plate } });
-          if (carToRemove) {
-            await userCar.destroy({
-              where: {
-                userID: req.session.userId,
-                carID: carToRemove.id
-              }
-            });
-          }
-          res.redirect('back');
+            const { plate } = req.body;
+
+            const carToRemove = await car.findOne({ where: { licensePlate: plate } });
+            if (carToRemove) {
+                await userCar.destroy({
+                    where: {
+                        userID: req.session.userId,
+                        carID: carToRemove.id
+                    }
+                });
+            }
+            res.redirect('back');
         } else {
-          res.status(401).json({ error: 'Invalid Credential' });
+            res.redirect('/auth')
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Error', error);
         res.status(500).json({ error: 'server error' });
-      }
+    }
 });
 
+//res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
 router.post('/favorite', async function (req, res, next) { // handles option for user to add car to favorite
     try {
-        const { plate } = req.body;
-
         if (req.session.userId) {
+            const { plate } = req.body;
+
             const Car = await car.findOne({ where: { licensePlate: plate } }) || await car.create({
                 licensePlate: plate
             });
@@ -54,10 +55,10 @@ router.post('/favorite', async function (req, res, next) { // handles option for
                 carID: Car.id
             });
 
+            res.redirect('back');
         } else {
-            res.status(401).json({ error: 'Invalid Credential' })
+            res.redirect('/auth')
         }
-        res.redirect('back');
 
     } catch (error) {
         console.error('Error', error);
@@ -76,7 +77,7 @@ router.get('/:licensePlate', async function (req, res) {
         let cardata = json[0];
 
         if (req.session.userId) {
-            const findSpecificCar = await car.findOne({ where: { licensePlate: plate }});
+            const findSpecificCar = await car.findOne({ where: { licensePlate: plate } });
 
             // Check if the car was found before proceeding
             if (findSpecificCar) {

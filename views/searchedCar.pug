@@ -7,7 +7,9 @@ block content
   h1= title
   p Welcome to #{title}
 
-
+  if errorMessage
+            .message
+                h2= errorMessage
   if car
     table.table-container
       tr.header-row
