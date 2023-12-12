@@ -22,11 +22,11 @@ router.post('/', async function (req, res) {
     let request = await fetch(`${API_URL}/${plate}?amount=1`);
     json = await request.json();
 
-    let cardata = json[0];
+    let carData = json[0];
     //res.status(200).json({carData});
 
-   
-      res.render('index', { title: 'Super Cars', car: cardata, isLoggedIn: req.session.userId});
+  
+    res.render('index', { title: 'Super Cars', car: carData, isLoggedIn: req.session.userId});
   } catch (error) {
     console.error('Error', error)
     res.status(500).json({ error: 'server error' })

@@ -109,4 +109,9 @@
   font-size: 1.5em; /* Larger text for the car name */
 }
 
+/* Style for the car image */
+.car-imageShowcase {
+  max-width: 250px; /* Set a max-width for the image */
+}
+
 

@@ -7,13 +7,12 @@ block content
   body 
     main
       h1= title
-      p Welcome to #{title}
+      p Write a license plate number to search for a car
 
       form(action="/" method="POST")
         input(type="text" placeholder="ab12345" name="nummerplade" required)
         button(type="submit") Search
 
-      
       if car
         a.car-container(href="/cars/" + car.regNr)
             img.car-image(src='static/genericCar.png' alt=car.name)
