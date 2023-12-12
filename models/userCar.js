@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 						model: 'car', // This should match the table name
 						key: 'id'
 				}
-		}
+		}  
 }, {
 		sequelize,
 		modelName: 'userCar',

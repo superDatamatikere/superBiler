@@ -26,6 +26,11 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+      }, 
+      lastViewed: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.NOW
       },
       createdAt: {
         allowNull: false,
