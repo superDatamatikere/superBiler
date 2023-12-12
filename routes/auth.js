@@ -28,7 +28,7 @@ router.post('/login', async function (req, res) {
 
 			} else if (isMatch) {
 				req.session.userId = User.id; // For session-based
-				res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
+				res.render('auth', { message: 'Success!' });
 			}
 		} 
 	} catch (error) {
@@ -83,7 +83,7 @@ router.post('/signup', async function (req, res) {
 					password: hashedPassword,
 				});
 				req.session.userId = newUser.id; // For session-based
-				res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
+				res.render('auth', { message: 'Success!' });
 				//res.status(201).json({ message: 'Bruger oprettet', user: newUser });
 			}
 		});

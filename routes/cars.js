@@ -40,7 +40,6 @@ router.post('/unfavorite', async function (req, res) {
     }
 });
 
-//res.render('auth', { message: 'Success! You will be redirected in 3 seconds...' });
 router.post('/favorite', async function (req, res, next) { // handles option for user to add car to favorite
     try {
         if (req.session.userId) {
@@ -74,7 +73,7 @@ router.get('/:licensePlate', async function (req, res) {
         let request = await fetch(`${API_URL}/${plate}?amount=1`);
         json = await request.json();
 
-        let cardata = json[0];
+        let carData = json[0];
 
         if (req.session.userId) {
             const findSpecificCar = await car.findOne({ where: { licensePlate: plate } });
@@ -83,12 +82,12 @@ router.get('/:licensePlate', async function (req, res) {
             if (findSpecificCar) {
                 const findUserCar = await userCar.findOne({ where: { userID: req.session.userId, carID: findSpecificCar.id } });
 
-                res.render('searchedCar', { title: 'Cars', car: cardata, isFavorite: findUserCar, isLoggedIn: req.session.userId });
+                res.render('searchedCar', { title: 'Cars', car: carData, isFavorite: findUserCar, isLoggedIn: req.session.userId });
             } else {
-                res.render('searchedCar', { title: 'Cars', car: cardata, isLoggedIn: req.session.userId });
+                res.render('searchedCar', { title: 'Cars', car: carData, isLoggedIn: req.session.userId });
             }
         } else {
-            res.render('searchedCar', { title: 'Cars', car: cardata, isLoggedIn: req.session.userId });
+            res.render('searchedCar', { title: 'Cars', car: carData, isLoggedIn: req.session.userId });
         }
     } catch (error) {
         console.error('Error', error)
