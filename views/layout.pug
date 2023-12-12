@@ -12,12 +12,10 @@ html
           li: a(href='/user/account') Account
           if isLoggedIn
             li: a(href='/auth/logout') Logout
-            if lastViewedCar
+            if lastViewedCar && !onLoginPage
               li Senest set bil:
-                span #{lastViewedCar.maerkeTypeNavn} #{lastViewedCar.modelTypeNavn}
-                span Registreringsnummer: #{lastViewedCar.regNr}
-                span Maksimum hastighed: #{lastViewedCar.maksimumHastighed}
-                span Drivkraft: #{lastViewedCar.drivkraftTypeNavn}
+                a(href=`/cars/${lastViewedCar.regNr}`)
+                  span #{lastViewedCar.maerkeTypeNavn} #{lastViewedCar.modelTypeNavn} (#{lastViewedCar.modelAar})
 
     block content
     footer

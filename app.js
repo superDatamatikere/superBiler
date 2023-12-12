@@ -32,6 +32,13 @@ app.use(session({
  // You can add other options here as needed, like cookie settings
 }));
 
+app.use((req, res, next) => {
+  if (req.session.lastViewedCar) {
+    res.locals.lastViewedCar = req.session.lastViewedCar;
+  }
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/user/favourite/cars', usersRouter);
