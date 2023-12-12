@@ -7,15 +7,24 @@ const MOT_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/tstyr/repor
 // Dette kører igennem en corsproxy, da jeg fik en CORS fejl.
 
 /* GET home page. */
-router.get('/', async function (req, res) {
+router.get('/', async function(req, res) {
+  let lastViewedCarData = null;
 
-  res.render('index', { title: 'Super Cars', isLoggedIn: req.session.userId });
+  // Hent lastViewedCar data fra sessionen
+  if (req.session.lastViewedCar) {
+    lastViewedCarData = req.session.lastViewedCar;
+  }
 
+  res.render('index', { 
+    title: 'Super Biler', 
+    isLoggedIn: req.session.userId,
+    lastViewedCar: lastViewedCarData 
+  });
 });
 
 router.post('/', async function (req, res) {
   try {
-    const { nummerplade } = req.body
+    const { nummerplade } = req.body;
     const plate = nummerplade;
     let json;
 
@@ -23,14 +32,25 @@ router.post('/', async function (req, res) {
     json = await request.json();
 
     let cardata = json[0];
-    //res.status(200).json({carData});
 
-   
-      res.render('index', { title: 'Super Cars', car: cardata, isLoggedIn: req.session.userId});
+    // Gem lastViewedCar data i sessionen
+    req.session.lastViewedCar = cardata;
+
+    // Hent lastViewedCar data fra sessionen
+    let lastViewedCarData = null;
+    if (req.session.lastViewedCar) {
+      lastViewedCarData = req.session.lastViewedCar;
+    }
+
+    // Brug console.log til at se dataene
+    console.log('lastViewedCarData:', lastViewedCarData);
+
+    res.render('index', { title: 'Super Cars', car: cardata, isLoggedIn: req.session.userId, lastViewedCar: lastViewedCarData });
   } catch (error) {
     console.error('Error', error)
-    res.status(500).json({ error: 'server error' })
+    res.status(500).json({ error: 'server error' });
   }
 });
+
 
 module.exports = router;
