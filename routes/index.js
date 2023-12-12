@@ -32,10 +32,20 @@ router.post('/', async function (req, res) {
     json = await request.json();
 
     let cardata = json[0];
-    //res.status(200).json({carData});
 
-   
-      res.render('index', { title: 'Super Cars', car: cardata, isLoggedIn: req.session.userId});
+    // Gem lastViewedCar data i sessionen
+    req.session.lastViewedCar = cardata;
+
+    // Hent lastViewedCar data fra sessionen
+    let lastViewedCarData = null;
+    if (req.session.lastViewedCar) {
+      lastViewedCarData = req.session.lastViewedCar;
+    }
+
+    // Brug console.log til at se dataene
+    console.log('lastViewedCarData:', lastViewedCarData);
+
+    res.render('index', { title: 'Super Cars', car: cardata, isLoggedIn: req.session.userId, lastViewedCar: lastViewedCarData });
   } catch (error) {
     console.error('Error', error)
     res.status(500).json({ error: 'server error' });
