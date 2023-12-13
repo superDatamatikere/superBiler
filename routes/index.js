@@ -4,7 +4,7 @@ const { userCar, car } = require('../models');
 
 const API_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/dmr/regnrquery';
 const MOT_URL = 'https://corsproxy.io/?https://www.tjekbil.dk/api/v3/tstyr/reports?vin='
-// Dette kører igennem en corsproxy, da jeg fik en CORS fejl.
+
 
 /* GET home page. */
 router.get('/', async function(req, res) {
@@ -16,7 +16,7 @@ router.get('/', async function(req, res) {
   }
 
   res.render('index', { 
-    title: 'Super Biler', 
+    title: 'Super Cars', 
     isLoggedIn: req.session.userId,
     lastViewedCar: lastViewedCarData 
   });
