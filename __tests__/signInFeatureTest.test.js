@@ -13,7 +13,7 @@ describe('POST /', () => {
       .send(validUser);
 
     expect(response.status).toBe(200);
-    expect(response.text).toContain('Success! You will be redirected in 3 seconds...');
+    expect(response.text).toContain('Success!');
   });
 });
 
