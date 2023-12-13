@@ -10,8 +10,8 @@
 body {
     padding-top: 70px; /* Adjust to match the header height */
     padding-bottom: 100px; /* Space for footer */
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    background-color: #fdfdff;
+    background: linear-gradient(to right, #f5faff, #fdfdff);
     display: flex;
     align-items: flex-start; /* Align items to the start, i.e., top of the viewport */
     justify-content: flex-start; /* Justify content to the start, i.e., top of the viewport */
