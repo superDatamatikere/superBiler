@@ -7,7 +7,7 @@
 }
 
 .flex-container > a {
-    background-color: #007bff; 
+    background-color: #0077ff; 
     margin: 10px;
     text-align: center;
     line-height: 75px; /* Consider reducing if button height is less */
@@ -15,7 +15,7 @@
     border-radius: 25px;
     cursor: pointer; /* To indicate it's clickable */
     border: none; 
-    color: #12171d; 
+    color: #ffffff; 
     padding: 5px 20px; /* Adjust as needed */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
 }

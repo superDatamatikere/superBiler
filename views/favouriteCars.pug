@@ -1,26 +1,20 @@
 extends layout
 
 block styles
+  link(rel='stylesheet' href='/stylesheets/indexstyle.css')
 
 
 block content
   body
     main
-      table
-        thead
-          tr
-            th User-Car Relationship ID
-            th User ID
-            th User Name
-            th Car ID
-            th License Plate
-        tbody
-          each userCar in userCars
-            tr
-              td #{userCar.userCarId}
-              td #{userCar.userId}
-              td #{userCar.userName}
-              td #{userCar.carId}
-              td #{userCar.licensePlate}
+      h1 Favoirte Cars
+      p You can click on a car to see more information about it
 
+      table
+        each userCar in userCars
+          tr
+            a.car-container(href="/cars/" + userCar.licensePlate)
+                img.car-image(src='/static/genericCar.png')
+                .car-info
+                  p license Plate: #{userCar.licensePlate}
 

@@ -16,7 +16,7 @@ router.get('/', async function(req, res) {
   }
 
   res.render('index', {
-    title: 'Super Biler',
+    title: 'Super Cars',
     isLoggedIn: req.session.userId,
     lastViewedCar: lastViewedCarData,
     recentCars: req.session.recentCars 
