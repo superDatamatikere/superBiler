@@ -1,0 +1,17 @@
+extends layout
+
+block styles
+    link(rel='stylesheet' href='/stylesheets/your-stylesheet.css')
+
+block content
+    body
+        main
+            h1 Seneste Sete Biler
+            if recentCars && recentCars.length > 0
+                ul
+                    each car in recentCars
+                        li
+                            a(href=`/cars/${car.regNr}`) 
+                                | Bil: #{car.maerkeTypeNavn} #{car.modelTypeNavn} (#{car.modelAar})
+            else
+                p Ingen seneste sete biler.

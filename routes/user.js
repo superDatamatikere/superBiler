@@ -12,13 +12,18 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/account', async function (req, res, next) {
-	if (!req.session.userId) {
-		res.redirect('/auth');
-	}
-	else if (req.session.userId) {
-		const currentUser = await user.findOne({ where: { id: req.session.userId } });
-		res.render('account', { title: 'Account Page', isLoggedIn: req.session.userId, User: currentUser });
-	}
+    if (!req.session.userId) {
+        res.redirect('/auth');
+    }
+    else if (req.session.userId) {
+        const currentUser = await user.findOne({ where: { id: req.session.userId } });
+        res.render('account', {
+            title: 'Account Page',
+            isLoggedIn: req.session.userId,
+            User: currentUser,
+            recentCars: req.session.recentCars
+        });
+    }
 });
 
 router.get('/update', function (req, res, next) {
@@ -67,7 +72,6 @@ router.get('/cars', async function (req, res, next) {
 	}
 });
 
-
 router.post('/cars', async function (req, res, next) {
 	try {
 		await userCar.create({
@@ -77,6 +81,17 @@ router.post('/cars', async function (req, res, next) {
 		console.error(e);
 		res.status(500).send("Error occurred");
 	}
+});
+
+router.get('/recent-cars', function(req, res) {
+    if (!req.session.userId) {
+        res.redirect('/auth');
+    } else {
+        res.render('recentCars', {
+            title: 'Seneste Sete Biler',
+            recentCars: req.session.recentCars
+        });
+    }
 });
 
 

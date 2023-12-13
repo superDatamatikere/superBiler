@@ -15,10 +15,11 @@ router.get('/', async function(req, res) {
     lastViewedCarData = req.session.lastViewedCar;
   }
 
-  res.render('index', { 
-    title: 'Super Biler', 
+  res.render('index', {
+    title: 'Super Biler',
     isLoggedIn: req.session.userId,
-    lastViewedCar: lastViewedCarData 
+    lastViewedCar: lastViewedCarData,
+    recentCars: req.session.recentCars 
   });
 });
 
@@ -36,6 +37,13 @@ router.post('/', async function (req, res) {
     // Gem lastViewedCar data i sessionen
     req.session.lastViewedCar = cardata;
 
+    // Opdater session med senest sete biler
+    if (!req.session.recentCars) {
+        req.session.recentCars = [];
+    }
+    req.session.recentCars.unshift(cardata); // Tilføj til starten af listen
+    req.session.recentCars = req.session.recentCars.slice(0, 10); // Behold kun de seneste 10
+
     // Hent lastViewedCar data fra sessionen
     let lastViewedCarData = null;
     if (req.session.lastViewedCar) {
@@ -45,12 +53,17 @@ router.post('/', async function (req, res) {
     // Brug console.log til at se dataene
     console.log('lastViewedCarData:', lastViewedCarData);
 
-    res.render('index', { title: 'Super Cars', car: cardata, isLoggedIn: req.session.userId, lastViewedCar: lastViewedCarData });
+    res.render('index', {
+      title: 'Super Cars',
+      car: cardata,
+      isLoggedIn: req.session.userId,
+      lastViewedCar: lastViewedCarData,
+      recentCars: req.session.recentCars
+    });
   } catch (error) {
     console.error('Error', error)
     res.status(500).json({ error: 'server error' });
   }
 });
-
 
 module.exports = router;

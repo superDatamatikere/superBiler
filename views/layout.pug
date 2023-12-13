@@ -12,10 +12,6 @@ html
           li: a(href='/user/account') Account
           if isLoggedIn
             li: a(href='/auth/logout') Logout
-            if lastViewedCar && !onLoginPage
-              li Senest set bil:
-                a(href=`/cars/${lastViewedCar.regNr}`)
-                  span #{lastViewedCar.maerkeTypeNavn} #{lastViewedCar.modelTypeNavn} (#{lastViewedCar.modelAar})
 
     block content
     footer
